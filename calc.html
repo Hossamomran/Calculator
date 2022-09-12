@@ -1,0 +1,157 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         .numbtn{
+             width:70px;
+             height: 70px;
+             line-height: 70px;
+             text-align: center;
+         }
+         .calc{
+             width:400px;
+             height: 600px;
+             position: absolute;
+             left:50%;
+             top:50%;
+             transform: translate(-50%,-50%);
+             border:3px solid black;
+             background-color: white(1, 175, 250);
+         }
+         #display{
+             height:70px;
+             border:2px solid black;
+             font-size: 50px;
+         }
+         button
+         {
+            margin: 10px;
+         }
+         
+    </style>
+    <script>
+
+        let currentNumber = "";
+        let operation = "";
+        let firstNumber = 0;
+        let secondNumber = 0;
+        function numberClick(num){
+            currentNumber = currentNumber + num;
+            document.getElementById("display").innerHTML=currentNumber;
+            diplayOperation();
+        }
+
+        function operationClick(op){
+            operation=op;
+            firstNumber = Number(currentNumber);
+            currentNumber = "";
+            diplayOperation();
+        }
+        
+        function inputclear(){
+            document.getElementById("display").innerHTML=("");
+            currentNumber="";
+            document.getElementById("displayResultsss").innerHTML=(" ");
+            
+        }
+        function NegativeAtt(e){
+            NegativeNumber=(-Math.abs(e));
+            currentNumber=NegativeNumber;
+            document.getElementById("display").innerHTML=currentNumber;
+            diplayOperation();
+
+           // console.log(NegativeNumber);
+            
+        }
+        function dot(e){
+            currentNumber=currentNumber+'.';
+            document.getElementById("displayResultsss").innerHTML=currentNumber;
+            diplayOperation();
+
+           // console.log(NegativeNumber);
+            
+        }
+        function Percentage(){
+            document.getElementById("display").innerHTML=currentNumber +"%";
+            currentNumber= currentNumber/100;
+            diplayOperation();
+
+            //console.log(currentNumber);
+        }
+         function diplayOperation()
+         {
+             f=firstNumber ==0? "": firstNumber;
+             o=operation;
+             s=secondNumber==0? "": secondNumber;
+             r=currentNumber;
+             console.log(currentNumber);
+             equals=firstNumber !=0 && secondNumber !=0 && currentNumber !="" ? "=" : "";
+             document.getElementById("displayResultsss").innerHTML=f+o+s+equals+`${r}`;
+             
+             /*if(isNaN(f)) {
+            document.getElementById("displayResults").innerHTML=" ";
+             }else if (!isNaN(f) && isNaN(s))
+             {
+             document.getElementById("displayResults").innerHTML=`${f}`;
+            }
+            **/
+        }
+        
+
+        function displayResult(){
+            secondNumber = Number(currentNumber);
+            let result = 0;
+            switch(operation){
+                case "*":
+                    result = firstNumber * secondNumber;
+                break;
+                case "/":
+                    result = firstNumber / secondNumber;
+                break;
+                case "-":
+                    result = firstNumber - secondNumber;
+                break;
+                case "+":
+                    result = firstNumber + secondNumber;
+                break;
+              
+            }
+            currentNumber  = String(result);
+            document.getElementById("display").innerHTML=result;
+            diplayOperation();
+        }
+    </script>
+</head>
+<body>
+    <div class="calc">
+        <div id="displayResultsss"></div>
+    <div id="display"></div>
+    <button class="numbtn" onclick="inputclear('C')">C</button>
+    <button  class="numbtn" id ="negative"onclick="NegativeAtt(currentNumber)">-/+</button>
+    <button  class="numbtn" onclick="Percentage()">%</button>
+    <button  class="numbtn" onclick="operationClick('/')">/</button>
+    <button class="numbtn" onclick="numberClick(7)">7</button>
+    <button class="numbtn" onclick="numberClick(8)">8</button>
+    <button class="numbtn" onclick="numberClick(9)">9</button>
+    
+    <button  class="numbtn" onclick="operationClick('*')">*</button>
+    <button class="numbtn" onclick="numberClick(4)">4</button>
+    <button class="numbtn" onclick="numberClick(5)">5</button>
+    <button class="numbtn" onclick="numberClick(6)">6</button>
+    <button  class="numbtn" onclick="operationClick('-')">-</button>
+    <button class="numbtn" onclick="numberClick(1)">1</button>
+    <button class="numbtn" onclick="numberClick(2)">2</button>
+    <button class="numbtn" onclick="numberClick(3)">3</button>
+    <button class="numbtn"  onclick="operationClick('+')">+</button>
+    
+    <button class="numbtn"style="width:165px" onclick="numberClick(3)">0</button>
+    <button  class="numbtn" onclick="dot()">.</button>
+    <button  class="numbtn" onclick="displayResult()">=</button>
+   
+    
+</div>
+</body>
+</html>
